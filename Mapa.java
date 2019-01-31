@@ -18,6 +18,14 @@ public class Mapa {
         return mapa[lin][col];
     }
 
+    public Posicao getPartida() {
+        return this.partida;
+    }
+
+    public Posicao getDestino() {
+        return this.destino;
+    }
+
     public void imprimirMapa() {
         for(Posicao[] colunas : this.mapa) {
             for(Posicao posicao : colunas) {
@@ -39,8 +47,6 @@ public class Mapa {
             int col = Integer.parseInt(primeiraLinha[1]);
 
             this.mapa = new Posicao[lin][col];
-
-            System.out.println("Mapa: ");
 
             for(int i = 0; i < lin; i++) {
                 char[] colunas = b.readLine().toCharArray();
@@ -83,9 +89,6 @@ public class Mapa {
 
             this.partida = this.mapa[linPartida][colPartida];
             this.destino = this.mapa[linDestino][colDestino];
-
-            imprimirMapa();
-
         } catch(IOException e) {}
     }
 }

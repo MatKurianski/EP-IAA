@@ -21,5 +21,5 @@ public class Tesouro {
     
     public void imprimirLinhaColuna() {
         System.out.println(lin+" "+col);
-    } 
+    }
 }

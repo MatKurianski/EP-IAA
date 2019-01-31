@@ -4,11 +4,15 @@ public class Posicao {
     private boolean estaBloqueada;
     private Tesouro tesouro;
 
+    private double tempoParaChegar;
+
     public Posicao(char c, int lin, int col) {
         this.lin = lin;
         this.col = col;
+
         this.estaBloqueada = c == 'X' ? true : false;
         this.tesouro = null;
+        this.tempoParaChegar = 0; // Porque o viajante ainda não acessou essa posição.
     }
 
     public int getLinha() {
@@ -19,8 +23,12 @@ public class Posicao {
         return this.col;
     }
 
-    public void imprimirLinhaColuna() {
-        System.out.println(getLinha()+" "+getColuna());
+    public boolean estaBloqueada() {
+        return estaBloqueada ? true : false;
+    }
+
+    public void setTesouro(int valor, int peso) {
+        tesouro = new Tesouro(valor, peso, getLinha(), getColuna());
     }
 
     public boolean temTesouro() {
@@ -31,11 +39,16 @@ public class Posicao {
         return temTesouro() ? tesouro : null;
     }
 
-    public boolean estaBloqueada() {
-        return estaBloqueada ? true : false;
+    public void setTempoParaChegar(double tempo) {
+        this.tempoParaChegar = tempo;
     }
 
-    public void setTesouro(int valor, int peso) {
-        tesouro = new Tesouro(valor, peso, getLinha(), getColuna());
+    public double getTempoParaChegar() {
+        return this.tempoParaChegar;
     }
+
+    public void imprimirLinhaColuna() {
+        System.out.println(getLinha()+" "+getColuna());
+    }
+
 }

@@ -1,36 +1,76 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedList;
 
 public class Viajante {
     private LinkedList<Tesouro> tesouros;
     private LinkedList<Posicao> posicoesVisitadas;
     private Mapa mapa;
-    private int opcao;
 
-    private float tempo;
+    private double tempoPassado;
     private int pesoTesouros;
     private int dinheiroTesouros;
 
-    public Viajante(String mapa, int opcao) {
+    public Viajante(String mapa) {
         this.tesouros = new LinkedList<>();
         this.posicoesVisitadas = new LinkedList<>();
         this.mapa = new Mapa(mapa);
-        this.opcao = opcao;
         
-        this.tempo = 0;
+        this.tempoPassado = 0;
         this.pesoTesouros = 0;
         this.dinheiroTesouros = 0;
     }
 
+    public int getPesoTesouros() {
+        return this.pesoTesouros;
+    }
+
+    public double tempoParaChegar() {
+        double intervalo = Math.pow(1 + (this.pesoTesouros / 10.0), 2.0);
+
+        return BigDecimal
+        .valueOf(intervalo)
+        .setScale(3, RoundingMode.HALF_UP)
+        .doubleValue();
+    }
+
+    public double getTempoPassado() {
+        return this.tempoPassado;
+    }
+
+    public int getNumItens() {
+        return this.tesouros.size();
+    }
+
+    public int getTamanhoCaminho() {
+        return this.posicoesVisitadas.size();
+    }
+
+    public int getValorItens() {
+        return this.dinheiroTesouros;
+    }
+
     public void imprimirCaminho() {
-        System.out.println("\nCaminho percorrido:\n");
         for (Posicao posicao : posicoesVisitadas) {
             posicao.imprimirLinhaColuna();
         }
     }
 
-    public void visitarPosicao(int lin, int col) {
+    public void imprimirItensColetados() {
+        for(Tesouro tesouro : this.tesouros) {
+            tesouro.imprimirLinhaColuna();
+        }
+    }
+
+    public boolean visitarPosicao(int lin, int col) {
         Posicao posicao = mapa.getPosicao(lin, col);
-        if(posicao.estaBloqueada()) return;
+        if(posicao.estaBloqueada()) return false;
+
+        if(posicao != this.mapa.getPartida()) {
+            posicao.setTempoParaChegar(this.tempoParaChegar());
+            this.tempoPassado += tempoParaChegar();
+        }
+
         posicoesVisitadas.add(posicao);
 
         if(posicao.temTesouro()) {
@@ -40,6 +80,9 @@ public class Viajante {
 
             this.tesouros.add(tesouro);
         }
+
+        return mapa.getDestino() == posicao ? true : false;
+
     }
 
     public void deixarPosicao(Posicao posicao) {
