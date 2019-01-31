@@ -19,6 +19,10 @@ public class Posicao {
         return this.col;
     }
 
+    public void imprimirLinhaColuna() {
+        System.out.println(getLinha()+" "+getColuna());
+    }
+
     public boolean temTesouro() {
         return tesouro != null ? true : false;
     }

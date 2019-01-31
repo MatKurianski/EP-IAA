@@ -5,16 +5,27 @@ public class Viajante {
     private LinkedList<Posicao> posicoesVisitadas;
     private Mapa mapa;
     private int opcao;
-    int pesoTesouros;
-    int dinheiroTesouros;
+
+    private float tempo;
+    private int pesoTesouros;
+    private int dinheiroTesouros;
 
     public Viajante(String mapa, int opcao) {
         this.tesouros = new LinkedList<>();
+        this.posicoesVisitadas = new LinkedList<>();
         this.mapa = new Mapa(mapa);
         this.opcao = opcao;
+        
+        this.tempo = 0;
+        this.pesoTesouros = 0;
+        this.dinheiroTesouros = 0;
+    }
 
-        pesoTesouros = 0;
-        dinheiroTesouros = 0;
+    public void imprimirCaminho() {
+        System.out.println("\nCaminho percorrido:\n");
+        for (Posicao posicao : posicoesVisitadas) {
+            posicao.imprimirLinhaColuna();
+        }
     }
 
     public void visitarPosicao(int lin, int col) {
