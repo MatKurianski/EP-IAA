@@ -6,16 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Mapa {
-    private char[][] mapa;
+    private Posicao[][] mapa;
 
     public Mapa(String arquivo) {
         gerarMapa(arquivo);
     }
 
-    private void imprimirMapa() {
-        for(char[] mapa1 : this.mapa) {
-            for(char mapa2 : mapa1) {
-                System.out.print(""+mapa2);
+    public void imprimirMapa() {
+        for(Posicao[] colunas : this.mapa) {
+            for(Posicao posicao : colunas) {
+                Character charPosicao = posicao.estaBloqueada() ? 'X' : '.';
+                System.out.print(charPosicao.toString());
             }
             System.out.println();
         }
@@ -31,7 +32,7 @@ public class Mapa {
             int lin = Integer.parseInt(primeiraLinha[0]);
             int col = Integer.parseInt(primeiraLinha[1]);
 
-            this.mapa = new char[lin][col];
+            this.mapa = new Posicao[lin][col];
 
             System.out.println("Linha: "+lin+"\n"+
                                 "Coluna: "+col);
@@ -39,7 +40,7 @@ public class Mapa {
             for(int i = 0; i < lin; i++) {
                 char[] colunas = b.readLine().toCharArray();
                 for(int j = 0; j < col; j++) {
-                    this.mapa[i][j] = colunas[j];
+                    this.mapa[i][j] = new Posicao(colunas[j], i, j);
                 }
             }
 

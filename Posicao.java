@@ -4,28 +4,30 @@ public class Posicao {
     private boolean estaBloqueada;
     private Tesouro tesouro;
 
-    Posicao(char c, int lin, int col) {
+    public Posicao(char c, int lin, int col) {
         this.lin = lin;
         this.col = col;
-        this.estaBloqueada = C == 'X' ? true : false;
+        this.estaBloqueada = c == 'X' ? true : false;
         this.tesouro = null;
     }
 
-    class Tesouro {
-        private int valor;
-        private int peso;
+    public int getLinha() {
+        return this.lin;
+    }
 
-        Tesouro(int valor, int peso) {
-            this.valor = valor;
-            this.peso = peso;
-        }
+    public int getColuna() {
+        return this.col;
+    }
 
-        int getPeso() {
-            return peso;
-        }
+    public boolean temTesouro() {
+        return tesouro != null ? true : false;
+    }
 
-        int getValor() {
-            return valor;
-        }
+    public boolean estaBloqueada() {
+        return estaBloqueada ? true : false;
+    }
+
+    public void setTesouro(int valor, int peso) {
+        tesouro = new Tesouro(valor, peso, getLinha(), getColuna());
     }
 }
