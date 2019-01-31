@@ -23,6 +23,10 @@ public class Posicao {
         return tesouro != null ? true : false;
     }
 
+    public Tesouro getTesouro() {
+        return temTesouro() ? tesouro : null;
+    }
+
     public boolean estaBloqueada() {
         return estaBloqueada ? true : false;
     }

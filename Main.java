@@ -4,7 +4,7 @@ public class Main {
             System.out.println("Uso: java EP <arquivo com definição do labirinto> <criterio>");
             return;
         } else {
-            new Mapa(args[0]);
+            new Viajante(args[0], Integer.parseInt(args[1]));
         }
     }
 }

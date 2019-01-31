@@ -12,6 +12,10 @@ public class Mapa {
         gerarMapa(arquivo);
     }
 
+    public Posicao getPosicao(int lin, int col) {
+        return mapa[lin][col];
+    }
+
     public void imprimirMapa() {
         for(Posicao[] colunas : this.mapa) {
             for(Posicao posicao : colunas) {
