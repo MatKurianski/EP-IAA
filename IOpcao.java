@@ -21,8 +21,8 @@ public abstract class IOpcao {
     public abstract void atualizarMelhorCaminho(LinkedList<Posicao> posicoesAndadas, LinkedList<Tesouro> tesouros, double tempo, int numItems, int valItens, int pesoItens);
 
     protected void atualizarInformacoes(LinkedList<Posicao> posicoesAndadas, LinkedList<Tesouro> tesouros, double tempo, int numItems, int valItens, int pesoItens) {
-        this.posicoesAndadas = (LinkedList) posicoesAndadas.clone();
-        this.tesouros = (LinkedList) tesouros.clone();
+        this.posicoesAndadas = new LinkedList<Posicao>(posicoesAndadas); // Clona as posições andadas.
+        this.tesouros = new LinkedList<Tesouro>(tesouros); // Clona os tesouros coletados.
         this.tempo = tempo;
         this.numItems = numItems;
         this.valItens = valItens;
@@ -31,7 +31,7 @@ public abstract class IOpcao {
     public void imprimirMelhorCaminho() {
         BigDecimal tempoFormatado = new BigDecimal(Double.toString(this.tempo));
         tempoFormatado = tempoFormatado.setScale(2, RoundingMode.HALF_DOWN);
-        
+
         System.out.print(this.posicoesAndadas.size()+" "+tempoFormatado.toString()+"\n");
         for(Posicao posicao : posicoesAndadas) {
             posicao.imprimirLinhaColuna();
