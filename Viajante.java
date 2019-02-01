@@ -11,10 +11,10 @@ public class Viajante {
     private int dinheiroTesouros;
 
     public Viajante(String mapa, IOpcao opcao) {
-        this.tesouros = new LinkedList<>();
-        this.posicoesVisitadas = new LinkedList<>();
-        this.mapa = new Mapa(mapa);
+        this.tesouros = new LinkedList<Tesouro>();
+        this.posicoesVisitadas = new LinkedList<Posicao>();
         this.opcao = opcao;
+        this.mapa = new Mapa(mapa);
         
         this.tempoPassado = 0;
         this.pesoTesouros = 0;
@@ -24,10 +24,6 @@ public class Viajante {
         visitarPosicao(partida.getLinha(), partida.getColuna());
     }
 
-    public int getPesoTesouros() {
-        return this.pesoTesouros;
-    }
-
     public double tempoParaChegar() {
         double num = 1.0 +  (pesoTesouros / 10.0);
         double intervalo = Math.pow(num, 2);
@@ -35,32 +31,16 @@ public class Viajante {
         return intervalo;
     }
 
+    public int getPesoTesouros() {
+        return this.pesoTesouros;
+    }
+
     public double getTempoPassado() {
         return this.tempoPassado;
     }
 
-    public int getNumItens() {
-        return this.tesouros.size();
-    }
-
-    public int getTamanhoCaminho() {
-        return this.posicoesVisitadas.size();
-    }
-
     public int getValorItens() {
         return this.dinheiroTesouros;
-    }
-
-    public void imprimirCaminho() {
-        for (Posicao posicao : posicoesVisitadas) {
-            posicao.imprimirLinhaColuna();
-        }
-    }
-
-    public void imprimirItensColetados() {
-        for(Tesouro tesouro : this.tesouros) {
-            tesouro.imprimirLinhaColuna();
-        }
     }
 
     public void visitarPosicao(int lin, int col) {
@@ -92,7 +72,7 @@ public class Viajante {
         boolean ehDestino = this.mapa.getDestino() == posicao ? true : false;
         
         if(ehDestino) {
-            opcao.atualizarMelhorCaminho(posicoesVisitadas, tesouros, getTempoPassado(), getNumItens(), getValorItens(), getPesoTesouros());
+            opcao.atualizarMelhorCaminho(posicoesVisitadas, tesouros, getTempoPassado(), getValorItens(), getPesoTesouros());
         } else {
             visitarPosicao(lin-1, col);
             visitarPosicao(lin, col+1);

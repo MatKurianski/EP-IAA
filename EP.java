@@ -20,8 +20,7 @@ public class EP {
                 default:
                     throw new IllegalArgumentException("O segundo argumento esta errado!");
             }
-            
-            Viajante viajante = new Viajante(args[0], opcao);
+            new Viajante(args[0], opcao);
             opcao.imprimirMelhorCaminho();
         }
     }

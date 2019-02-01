@@ -33,12 +33,12 @@ public class Posicao {
         tesouro = new Tesouro(valor, peso, getLinha(), getColuna());
     }
 
-    public boolean temTesouro() {
-        return tesouro != null ? true : false;
-    }
-
     public Tesouro getTesouro() {
         return temTesouro() ? tesouro : null;
+    }
+
+    public boolean temTesouro() {
+        return tesouro != null ? true : false;
     }
 
     public void setTempoParaChegar(double tempo) {

@@ -18,30 +18,20 @@ public class Mapa {
         return mapa[lin][col];
     }
 
-    public Posicao getPartida() {
-        return this.partida;
-    }
-
-    public Posicao getDestino() {
-        return this.destino;
-    }
-
-    public void imprimirMapa() {
-        for(Posicao[] colunas : this.mapa) {
-            for(Posicao posicao : colunas) {
-                Character charPosicao = posicao.estaBloqueada() ? 'X' : '.';
-                System.out.print(charPosicao.toString());
-            }
-            System.out.println();
-        }
-    }
-
     public int getMaxLin() {
         return this.mapa.length-1;
     }
 
     public int getMaxCol() {
         return this.mapa[0].length-1;
+    }
+
+    public Posicao getPartida() {
+        return this.partida;
+    }
+
+    public Posicao getDestino() {
+        return this.destino;
     }
 
     private void gerarMapa(String arquivo) {
