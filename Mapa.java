@@ -36,6 +36,14 @@ public class Mapa {
         }
     }
 
+    public int getMaxLin() {
+        return this.mapa.length-1;
+    }
+
+    public int getMaxCol() {
+        return this.mapa[0].length-1;
+    }
+
     private void gerarMapa(String arquivo) {
         BufferedReader b;
 

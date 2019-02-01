@@ -5,20 +5,25 @@ import java.util.LinkedList;
 public class Viajante {
     private LinkedList<Tesouro> tesouros;
     private LinkedList<Posicao> posicoesVisitadas;
+    private IOpcao opcao;
     private Mapa mapa;
 
     private double tempoPassado;
     private int pesoTesouros;
     private int dinheiroTesouros;
 
-    public Viajante(String mapa) {
+    public Viajante(String mapa, IOpcao opcao) {
         this.tesouros = new LinkedList<>();
         this.posicoesVisitadas = new LinkedList<>();
         this.mapa = new Mapa(mapa);
+        this.opcao = opcao;
         
         this.tempoPassado = 0;
         this.pesoTesouros = 0;
         this.dinheiroTesouros = 0;
+
+        Posicao partida = this.mapa.getPartida();
+        visitarPosicao(partida.getLinha(), partida.getColuna());
     }
 
     public int getPesoTesouros() {
@@ -62,9 +67,15 @@ public class Viajante {
         }
     }
 
-    public boolean visitarPosicao(int lin, int col) {
+    public void visitarPosicao(int lin, int col) {
+        if(lin > this.mapa.getMaxLin() || 
+           col > this.mapa.getMaxCol() ||
+           col < 0                     ||
+           lin < 0
+        ) return;
+
         Posicao posicao = mapa.getPosicao(lin, col);
-        if(posicao.estaBloqueada()) return false;
+        if(posicao.estaBloqueada() || posicao.foiVisitada()) return;
 
         if(posicao != this.mapa.getPartida()) {
             posicao.setTempoParaChegar(this.tempoParaChegar());
@@ -72,6 +83,7 @@ public class Viajante {
         }
 
         posicoesVisitadas.add(posicao);
+        posicao.setFoiVisitada(true);
 
         if(posicao.temTesouro()) {
             Tesouro tesouro = posicao.getTesouro();
@@ -81,8 +93,17 @@ public class Viajante {
             this.tesouros.add(tesouro);
         }
 
-        return mapa.getDestino() == posicao ? true : false;
-
+        boolean ehDestino = this.mapa.getDestino() == posicao ? true : false;
+        
+        if(ehDestino) {
+            opcao.atualizarMelhorCaminho(posicoesVisitadas, tesouros, getTempoPassado(), getNumItens(), getValorItens(), getPesoTesouros());
+        } else {
+            visitarPosicao(lin+1, col);
+            visitarPosicao(lin-1, col);
+            visitarPosicao(lin, col+1);
+            visitarPosicao(lin, col-1);
+        }
+        deixarPosicao(posicao);
     }
 
     public void deixarPosicao(Posicao posicao) {
@@ -93,6 +114,7 @@ public class Viajante {
             
             this.tesouros.remove(tesouro);
         }
+        posicao.setFoiVisitada(false);
         this.posicoesVisitadas.remove(posicao);
     }
 }
