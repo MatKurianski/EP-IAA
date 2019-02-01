@@ -31,12 +31,10 @@ public class Viajante {
     }
 
     public double tempoParaChegar() {
-        double intervalo = Math.pow(1 + (this.pesoTesouros / 10.0), 2.0);
+        double num = 1.0 +  (pesoTesouros / 10.0);
+        double intervalo = Math.pow(num, 2);
 
-        return BigDecimal
-        .valueOf(intervalo)
-        .setScale(3, RoundingMode.HALF_UP)
-        .doubleValue();
+        return intervalo;
     }
 
     public double getTempoPassado() {
@@ -98,9 +96,9 @@ public class Viajante {
         if(ehDestino) {
             opcao.atualizarMelhorCaminho(posicoesVisitadas, tesouros, getTempoPassado(), getNumItens(), getValorItens(), getPesoTesouros());
         } else {
-            visitarPosicao(lin+1, col);
             visitarPosicao(lin-1, col);
             visitarPosicao(lin, col+1);
+            visitarPosicao(lin+1, col);
             visitarPosicao(lin, col-1);
         }
         deixarPosicao(posicao);
@@ -111,10 +109,10 @@ public class Viajante {
             Tesouro tesouro = posicao.getTesouro();
             this.dinheiroTesouros -= tesouro.getValor();
             this.pesoTesouros -= tesouro.getPeso();
-            
             this.tesouros.remove(tesouro);
         }
         posicao.setFoiVisitada(false);
+        this.tempoPassado -= posicao.getTempoParaChegar();
         this.posicoesVisitadas.remove(posicao);
     }
 }
