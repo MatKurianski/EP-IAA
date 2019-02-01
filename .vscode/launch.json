@@ -5,7 +5,7 @@
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "EP",
-            "args": ["mapa1.txt", "2"]
+            "args": ["mapa1.txt", "1"]
         }
     ]
 }

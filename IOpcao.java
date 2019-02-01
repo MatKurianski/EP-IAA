@@ -1,4 +1,6 @@
 import java.util.LinkedList;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public abstract class IOpcao {
     LinkedList<Posicao> posicoesAndadas;
@@ -27,7 +29,10 @@ public abstract class IOpcao {
         this.pesoItens = pesoItens;
     }
     public void imprimirMelhorCaminho() {
-        System.out.print(posicoesAndadas.size()+" "+tempo+"\n");
+        BigDecimal tempoFormatado = new BigDecimal(Double.toString(this.tempo));
+        tempoFormatado = tempoFormatado.setScale(2, RoundingMode.HALF_DOWN);
+        
+        System.out.print(this.posicoesAndadas.size()+" "+tempoFormatado.toString()+"\n");
         for(Posicao posicao : posicoesAndadas) {
             posicao.imprimirLinhaColuna();
         }
