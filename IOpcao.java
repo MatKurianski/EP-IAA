@@ -1,3 +1,8 @@
+/*
+    Nome: Matheus Aquati Kurianski
+    NºUSP: 10687541
+*/
+
 import java.util.LinkedList;
 import java.text.DecimalFormat;
 

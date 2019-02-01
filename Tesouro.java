@@ -1,3 +1,8 @@
+/*
+    Nome: Matheus Aquati Kurianski
+    NºUSP: 10687541
+*/
+
 public class Tesouro {
     private int valor;
     private int peso;

@@ -1,3 +1,8 @@
+/*
+    Nome: Matheus Aquati Kurianski
+    NºUSP: 10687541
+*/
+
 import java.util.LinkedList;
 
 public class Opcao3 extends IOpcao {
