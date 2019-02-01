@@ -1,6 +1,5 @@
 import java.util.LinkedList;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public abstract class IOpcao {
     LinkedList<Posicao> posicoesAndadas;
@@ -27,10 +26,9 @@ public abstract class IOpcao {
     }
 
     public void imprimirMelhorCaminho() {
-        BigDecimal tempoFormatado = new BigDecimal(Double.toString(this.tempo));
-        tempoFormatado = tempoFormatado.setScale(2, RoundingMode.HALF_DOWN);
+        DecimalFormat tempoFormatado = new DecimalFormat("0.##"); 
 
-        System.out.print(this.posicoesAndadas.size()+" "+tempoFormatado.toString()+"\n");
+        System.out.print(this.posicoesAndadas.size()+" "+tempoFormatado.format(tempo).replace(",", ".")+"\n");
         for(Posicao posicao : posicoesAndadas) {
             posicao.imprimirLinhaColuna();
         }
