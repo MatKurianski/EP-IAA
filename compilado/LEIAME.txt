@@ -1,3 +1,0 @@
-Compilado e testado com Windows 10 e Ubuntu 18.04 (ambos 64bits), usando o Java em sua versão 1.8.0_201.
-
-OBS: Provavelmente funciona com Java 7 mas não abaixo disto.
