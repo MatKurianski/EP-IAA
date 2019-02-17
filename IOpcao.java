@@ -6,7 +6,7 @@
 import java.util.LinkedList;
 import java.text.DecimalFormat;
 
-public abstract class IOpcao {
+public class IOpcao {
     LinkedList<Posicao> posicoesAndadas;
     LinkedList<Tesouro> tesouros;
     double tempo;
@@ -20,9 +20,7 @@ public abstract class IOpcao {
         this.pesoItens = 0;
     }
 
-    public abstract void atualizarMelhorCaminho(LinkedList<Posicao> posicoesAndadas, LinkedList<Tesouro> tesouros, double tempo, int valItens, int pesoItens);
-
-    protected void atualizarInformacoes(LinkedList<Posicao> posicoesAndadas, LinkedList<Tesouro> tesouros, double tempo, int valItens, int pesoItens) {
+    protected void atualizarMelhorCaminho(LinkedList<Posicao> posicoesAndadas, LinkedList<Tesouro> tesouros, double tempo, int valItens, int pesoItens) {
         this.posicoesAndadas = new LinkedList<Posicao>(posicoesAndadas); // Clona as posições andadas.
         this.tesouros = new LinkedList<Tesouro>(tesouros); // Clona os tesouros coletados.
         this.tempo = tempo;

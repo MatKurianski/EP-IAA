@@ -26,7 +26,12 @@ public class Viajante {
         this.dinheiroTesouros = 0;
 
         Posicao partida = this.mapa.getPartida();
-        visitarPosicao(partida.getLinha(), partida.getColuna());
+        if(partida != null) {
+            visitarPosicao(partida.getLinha(), partida.getColuna());
+        } else {
+            System.out.println("O mapa não foi encontrado ou é inválido. Verifique o arquivo e tente novamente");
+            System.exit(126);
+        }
     }
 
     public double tempoParaChegar() {
